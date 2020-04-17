@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJS - Guia completo</title>
+    <script type="text/javascript" src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+    <div id="app">
+        <p>Instancia 1</p>
+        <h3 v-if="mostrarMensagem">Título alterado!</h3>
+        <p>Título: {{ titulo }}</p>
+        <h2 ref="meuTitulo">{{ titulo }}</h2>
+        <button @click="alterarTitulo2">Alterar Titulo 2</button>
+        <p>Título lower case: {{ tituloLowerCase }}</p>
+        <input v-model="novoTitulo">
+        <button @click="alterarTitulo">Alterar titulo</button>
+
+        <h1> Montando Template</h1>
+        <h2> {{ curso }} </h2>
+    </div>
+
+    <div id="app2">
+      <p>Instancia 2</p>
+      <p> Titulo: {{ titulo }}</p>
+      <button @click="alterarTitulo"> Alterar Titulo</button>
+    </div>
+
+    <h1> Acessando propriedades de outras instancias</h1>
+    <p>alterarTitulo</p>
+
+    <h1> Como Vue gerencia propriedades e metodos </h1>
+    <div id="app3">
+      <p>Vm3</p>
+      <p> {{ titulo }}</p>
+      <p> {{ novoProriedade }}</p>
+      <p> {{ usuario }}</p>
+      <p> {{ data2 }}</p>
+    </div>
+
+    <h1> Vue e simplesmente Javascript </h1>
+    <p>console.log(vm3.$el === document.getElementById('app3'));</p>
+
+    <h1> Usando $refs</h1>
+    <p>meuTitulo</p>
+
+    <h1> Montando Template</h1>
+    <h2> {{ curso }} </h2>
+    <div id="app4"></div>
+
+    <h1> Usando componente</h1>
+    <div id="app5">
+
+      <div class="meu-component"></div>    
+      <div class="meu-component"></div>  
+      <h2> Instanca 01</h2>
+      <meu-component></meu-component>  
+      <meu-component></meu-component>  
+    </div>
+
+    <h1> Limitacoes em templates </h1>
+
+    <script type="text/javascript">
+    Vue.component('meu-component', {
+      template: '<h3> Meu primeiro component </h3>'
+    });
+    
+        var vm1 = new Vue({
+            //el: '#app',
+            data: {
+                titulo: 'Instância Vue',
+                novoTitulo: '',
+                mostrarMensagem: false,
+                curso: 'Teste'
+            },
+            methods: {
+                alterarTitulo: function() {
+                    this.titulo = this.novoTitulo;
+                    this.novoTitulo = '';
+                },
+                alterarTitulo2: function() {
+                  this.$refs.meuTitulo.innerText = "Curso de VUEJS";
+                }
+            },
+            computed: {
+                tituloLowerCase: function() {
+                    return this.titulo.toLowerCase().split(' ').join('-');
+                }
+            },
+            watch: {
+                titulo: function(novoTitulo, antigoTitulo) {
+                    console.log('Título alterado: ', 'de "', antigoTitulo, '" para "', novoTitulo, '"');
+                    this.mostrarMensagem = true;
+                    var self = this;
+                    setTimeout(function () { 
+                        self.mostrarMensagem = false; 
+                    }, 3000);
+                }
+            }
+        });
+
+        vm1.$mount('#app');
+
+        var vm2 = new Vue({
+            el: '#app2',
+            data: {
+                titulo: 'Instância Vue2',
+            },
+            methods: {
+              alterarTitulo: function(event) {
+                vm1.titulo = "testasa";
+              }
+            }
+          }
+        );
+
+        var data2 = {
+          teste: 'teste',
+          dede: 'dede'
+        }
+
+        var vm3 = new Vue({
+            el: '#app3',
+            data: {
+                titulo: 'Instância Vue3',
+                novoProriedade: '', // Voce precisa setar / getar para que funcione
+                usuario: {},
+                data2: data2
+            },
+          }
+        );
+
+        //vm3.novoProriedade = "Nova Propriedade"; //Nao e reativo
+        setTimeout(function() {
+          vm3.novoProriedade = "Nova Propriedade";  // Forma incorreta de criar novas prorpriedades
+          vm3.$set(vm3.usuario, 'nome', 'Plinio'); // vm3.$set ou Vue.set
+          setTimeout(function() {
+            vm3.novoProriedade = "Nova Propriedade2"; 
+            //vm3.$set(vm3.usuario, 'nome', 'Plinio');
+            Vue.set(vm3.usuario, 'email', "plinio@gmail.com"); // vm3.$set ou Vue.set
+          }, 3000);
+        }, 3000);
+        console.log(vm3);
+
+        console.log(vm3.$el === document.getElementById('app3'));
+
+        console.log(vm3.$data.data2 === data2);
+
+        setTimeout(function() {
+          this.data2.teste = "lala"; 
+        } , 3000);
+
+        console.log(vm1);
+
+        var vm4 = new Vue({
+          //template: '<h2> Teste <h2>',
+          data: {},
+        });
+
+        vm4.$mount('#app4');
+        //vm4.$mount();
+        //document.getElementById('app4').appendChild(vm4.$el);
+
+        var vm5 = new Vue({
+          el: '#app5',
+          //template: '<h2> Teste <h2>',
+          //data: {},
+        });
+
+    </script>
+    
+</body>
+</html>

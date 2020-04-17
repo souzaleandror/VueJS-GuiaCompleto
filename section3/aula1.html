@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .seprador {
+      list-style-type: none;
+      border-bottom: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1> If and Else </h1>
+    <p v-if="mostrar"> Ola VueJS</p>
+    <p v-else> Vice e versa</p>
+    <p>Ate logo</p>
+    <button @click="mostrar = !mostrar">Alterar</button>
+
+    <h1> V-else-if </h1>
+    <input v-model="nota" placeholder="Nota">
+    <p v-if="nota === 'A'">Parabens A</p>
+    <p v-else-if="nota === 'B'">Parabens B</p>
+    <p v-else-if="nota === 'C'">Parabens C</p>
+    <p v-else-if="nota === 'D'">Parabens D</p>
+    <p v-else>Parabens E</p>
+  
+    <h1> Renderiznado grupos de elementos condicionais</h1>
+    <ul>
+      <li> Ola VueJS</li>
+      <li> Item 1</li>
+      <template v-if="mostrar">
+        <li> Item 2</li>
+        <li> Item 3</li>
+      </template>
+    </ul>
+
+    <h1>Controlando reutilizacao de elementos key</h1>
+    <button @click="login = !login"> Toggle </button>
+    <template v-if="login">
+      <label> Login: </label>
+      <input placeholder="Login" key="campo-login">
+    </template>
+    <template v-else>
+      <label> Email: </label>
+      <input placeholder="Email" key="campo-email">
+    </template>
+
+    <h1>V show - ocultando elementos - display none/block (v-if remove do DOM e v-show mantem no dom</h1>
+    <button @click="mostrar = !mostrar"> Toggle</button>
+    <p v-show="mostrar">Diretiva V-show</p>
+
+    <h1>Diferencas entre v-if e v-show </h1>
+    <button @click="mostrar = !mostrar"> Toggle</button>
+    <p v-if="mostrar">Diretiva V-if</p>
+    <p v-show="mostrar">Diretiva V-show</p>
+
+    <h1> Listas v-for </h1>
+      <h2>Produtos</h2>
+      <ul>
+        <li v-for="produto in produtos"> {{texto }} {{ produto }}</li>
+      </ul>
+      <ul>
+        <li v-for="produto of produtos"> {{texto }} {{ produto }}</li>
+      </ul>
+
+    <h1> Listas v-for - Acessando index / indice</h1>
+    <ul>
+      <li v-for="(produto, i) in produtos"> {{texto }} {{ i }} - {{ produto }}</li>
+    </ul>
+
+    <h1> Listas v-for - Iterando Objetos </h1>
+    <ul>
+      <li v-for="valor in produtos2"> {{texto }} {{ valor }} </li>
+    </ul>
+    <ul>
+      <li v-for="(valor, chave) in produtos2"> {{texto }} {{ chave }} - {{ valor }} </li>
+    </ul>
+    <ul>
+      <li v-for="(valor, chave, indice) in produtos2"> {{texto }} {{ indice }} {{ chave }} - {{ valor }} </li>
+    </ul>
+
+    <h1> Listas v-for - Iterando valores numericos </h1>
+    <ul>
+      <li v-for="valor in 30"> {{ valor }}</li>
+    </ul>
+    <ul>
+      <li v-for="(valor, indice) in 30"> ({{ indice }}) {{ valor }}</li>
+    </ul>
+
+    <h1> Rastreando identificando dos elementos no v-for com key</h1>
+    <ul>
+      <li v-for="(valor, indice) in produtos3"> ({{ indice }}) {{ valor }}</li>
+    </ul>
+    <button @click="addProduto"> Add Produto</button>
+    <button @click="produtos3.reverse()"> Reverse</button>
+    <ul>
+      <li v-for="(valor, indice) in produtos3" :key="valor.id"> ({{ indice }}) {{ valor }}</li>
+    </ul>
+
+    <h1> Agrupando elementos com templates</h1>
+    <p>Produtos: </p>
+    <ul>
+      <template v-for="produto in produtos3">
+        <li> {{produto}}</li>
+        <li class="seprador"></li>
+      </template>
+    </ul>
+
+    <h1> v-for junto com v-if e filtragem de arrays</h1>
+    <ul>
+      <li v-for="tarefa of tarefas" :key="tarefa.id" v-if="!tarefa.completa"> {{tarefa.titulo}}</li>
+    </ul>
+    <ul v-if="tarefasIncompleta.length">
+      <li v-for="tarefa of tarefasIncompleta" :key="tarefa.id"> {{tarefa.titulo}}</li>
+    </ul>
+    <p v-else>Nao existem tarefas a fazer.</p>
+
+    <h1> Dectectando mudancas em Arrays</h1>
+    <ul>
+      <li v-for="(valor, indice) in produtos3"> ({{ indice }}) {{ valor }}</li>
+    </ul>
+    <button @click="adicionarProduto">Adicionar Produto </button>
+    <button @click="produtos3 = produtos3.slice(0, 4)">Substituir Array</button>
+    <button @click="substituirProduto">Substiuir Produto </button>
+    <button @click="cortarArray">Cortar Produto </button>
+
+    <h1> Dectectando mudancas em Objetos</h1>
+    <p>Objeto: </p>
+    <ul>
+      <li v-for="(valor, chave) in tasks">{{ chave }}: {{ valor }}</li>
+    </ul>
+    <button @click="adicionarPropriedade">Adicionar Propriedade </button>
+    <ul>
+      <li v-for="(valor, chave) in usuario">{{ chave }}: {{ valor }}</li>
+    </ul>
+    <button @click="substituiorObjeto">Adicionar Propriedade </button>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+  new Vue({
+	el: '#app',
+  data: {
+    mostrar: true,
+    nota: '',
+    login: false,
+    texto: "Produto :",
+    produtos: [
+      'Monitor',
+      'Teclado',
+      'Mouse'
+    ],
+    produtos2: {
+      id: 1,
+      nome: 'Teclado',
+      marca: 'Dell',
+      valor: 200,
+    },
+    produtos3: [
+      { id: 1, nome: "Teste1" },
+      { id: 2, nome: "Teste2" },
+      { id: 3, nome: "Teste3" },
+      { id: 4, nome: "Teste4" },
+    ],
+    tarefas: [
+      {id: 1, titulo: "titlo1", completa: true},
+      {id: 2, titulo: "titlo2", completa: false},
+      {id: 3, titulo: "titlo3", completa: false},
+      {id: 4, titulo: "titlo4", completa: false},
+      {id: 5, titulo: "titlo5", completa: false},
+    ],
+    tasks: {id: 1, titulo: "titlo1", completa: true},
+    usuario: {nome: '', idade: 0},
+  },
+  methods: {
+    addProduto: function() {
+      var id = this.produtos3.length + 1;
+      this.produtos3.push({id: id, nome: "teste"+id});
+    },
+    adicionarProduto: function(event) {
+      var id = this.produtos3.length + 1;
+      this.produtos3.push({id: id, nome: "teste" + id});
+    },
+    substituirProduto: function(event) {
+      var tamanho = this.produtos3.length;
+      var indice = Math.round(tamanho / 2);
+      var novoProduto = {id: (tamanho + 1), nome: "teste" + (tamanho + 1)};
+      console.log(tamanho, indice);
+      //this.produtos3[indice] = novoProduto; // Nao reativo / Nao funciona
+      Vue.set(this.produtos3, indice, novoProduto);
+      //this.$set(this.produtos3, indice, novoProduto);
+      //this.produtos3.splice(indice, 1, novoProduto);
+
+    },
+    cortarArray: function(event) {
+      //this.produtos3.length = 2; // Nao reativo / Nao funciona
+      this.produtos3.splice(2);
+    },
+    adicionarPropriedade: function(event) {
+      this.usuario = {nome: 'Plinio', idade: 18}; // funciona porque foi declarado antes
+      this.tasks.titulo = 'asdasa'; // Nao reativo
+      Vue.set(this.tasks, 'titulo', "Teste123");
+      this.$set(this.tasks, 'titulo', "teste123");
+    },
+    substituiorObjeto: function(event){
+      //Object.assign(this.tasks, {preco: 40, title: "teste"}); // Nao e reativo / Nao funciona
+      this.tasks = Object.assign({}, this.tasks, {preco: 40, title: "teste"});
+    }
+  },
+  computed: {
+    tarefasIncompleta: function() {
+      return this.tarefas.filter(function(tarefa){
+        return !tarefa.completa;
+      });
+    }
+  }
+});
+</script>
+</html>
