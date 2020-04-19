@@ -1,0 +1,98 @@
+
+cd VueJS-GuiaCompleto/
+cd section5
+cd vue-cli-hello-world2
+npm i -D sass-loader node-sass
+npm run server
+npm run serve
+npm run serve
+npm run serve --fix
+npm run serve --fix
+npm run serve --fix
+npm run serve
+npm run serve
+npm run serve
+npm run serve
+npm run serve
+npm run serve
+npm run serve
+npm run serve
+npm run serve
+npm run serve
+npm run serve
+npm run build.
+npm run build
+npm run serve
+vue-cli-service lint
+npm run lint
+npm run build
+cd dist/
+cd ..
+npm install -g @vue/cli @vue/cli-service-global
+npm run lint
+vue serve OlaMundo.vue
+npm run lint -- OlaMundo.vue
+vue serve OlaMundo.vue
+vue serve OlaMundo.vue
+npm run build
+npm -v
+vue -v
+vue --version
+npm -v
+cd Desktop/
+cd app_guia_sh/
+cd ios
+flutter build ios
+cd ..
+flutter build ios
+cd Desktop/
+cd app_guia_sh/
+flutter doctor -v
+cd Desktop/
+cd udemy/
+ls
+cd VueJS-GuiaCompleto/
+ls
+cd section
+cd section5
+ls
+cd vue-cli-hello-world2
+ls
+cd dist/
+npx http-server -o
+cd ..
+npm run build
+npm run serve
+npm run serve
+npm run lint -- OlaMundo.vue
+vue serve OlaMundo.vue
+npm i -g service-global
+npm i -g @vue\cli-service-global
+npm i -g @vue/cli-service-global
+vue build --target app
+vue build --target app OlaMundo.vue
+vue build --target app OlaMundo.vue
+cd olaMundo/
+npx http-server -o
+npx http-server -o
+cd ..
+vue build --lib app OlaMundo.vue
+vue build --lib OlaMundo.vue
+vue build --target lib OlaMundo.vue
+history
+vue build --target lib -name olaMundoOlaMundo.vue
+vue build --target lib --name olaMundoOlaMundo.vue
+vue build --target lib --name olaMundoOlaMundo.vue
+ls
+vue build --target lib --name olaMundoOlaMundo.vue
+vue build --target lib --name olaMundo OlaMundo.vue
+vue build --target wc --name ola-mundo OlaMundo.vue
+vue ui
+npm i -g @vue-cli-init
+npm i -g @vue/cli-init
+vue init webpack vue-init-hello-world
+cd Desktop/
+cd app_guia_sh/
+flutter build ios
+flutter clean
+flutter build ios
