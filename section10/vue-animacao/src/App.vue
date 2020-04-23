@@ -84,7 +84,7 @@ export default {
       console.log("done");
 
       let contagem = 0;
-      const tamanho = el.offsetwidth;
+      //const tamanho = el.offsetwidth;
 
       const intervalo = setTimeout(() => {
         el.style.opacity = +el.style.opacity + 0.1;
@@ -96,7 +96,7 @@ export default {
         }
       }, 150);
 
-      done();
+      //done();
     },
     afterLeave(el) {
       console.log(el);
@@ -118,6 +118,7 @@ body {
 
 
 <style scoped>
+
 .slide-enter,
 .slide-leave-to {
   opacity: 0;
